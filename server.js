@@ -22,16 +22,16 @@ app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-app.get('/api/notes', function(req, res) {
+app.get('/api/note', function(req, res) {
     fs.readFile(__dirname, '/db/db.json', (err, data) => {
         return res.json((JSON.parse(data)));
     });
 });
 
-app.post('/api/notes', function(req, res) {
+app.post('/api/note', function(req, res) {
     var newNote = req.body;
 
-    fs.readFile(__dirname, 'db/db.json', (err, data) => {
+    fs.readFile(__dirname, '/db/db.json', (err, data) => {
         var noteDb = JSON.parse(data);
         noteDb.push(newNote);
         fs.writeFile(__dirname, '/db/db.json', JSON.stringify(noteDb));
@@ -39,7 +39,7 @@ app.post('/api/notes', function(req, res) {
 });
 
 
-app.delete('api/notes/:id', function(req, res) {
+app.delete('api/note/:id', function(req, res) {
     let delReq = req.params;
     let id = delReq.id;
 

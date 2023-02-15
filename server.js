@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const app = express();
+const dbFilePath = path.join(__dirname, '/db/db.json');
 
 const PORT = process.env.PORT || 3001;
 
@@ -23,7 +24,7 @@ app.get('/*', function (req, res) {
 });
 
 app.get('/api/notes', function(req, res) {
-    fs.readFile(path.join(__dirname, '/db/db.json'), (err, data) => {
+    fs.readFile(dbFilePath, (err, data) => {
         return res.json((JSON.parse(data)));
     });
 });
@@ -31,10 +32,10 @@ app.get('/api/notes', function(req, res) {
 app.post('/api/notes', function(req, res) {
     var newNote = req.body;
 
-    fs.readFile(path.join(__dirname, '/db/db.json'), (err, data) => {
+    fs.readFile(dbFilePath, (err, data) => {
         var noteDb = JSON.parse(data);
         noteDb.push(newNote);
-        fs.writeFile(path.join(__dirname, '/db/db.json'), JSON.stringify(noteDb));
+        fs.writeFile(dbFilePath, JSON.stringify(noteDb));
     });
 });
 
@@ -43,12 +44,12 @@ app.delete('api/notes/:id', function(req, res) {
     let delReq = req.params;
     let id = delReq.id;
 
-    fs.readFile(path.join(__dirname, '/db/db.json'), (err, data) => {
+    fs.readFile(dbFilePath, (err, data) => {
          let noteDb = JSON.parse(data);
         
          const filteredNotes = noteDb.filter((element) => element.id !== id);
 
-         fs.writeFileSync(path.join(__dirname, '/db/db.json'), JSON.stringify(filteredNotes));
+         fs.writeFileSync(dbFilePath, JSON.stringify(filteredNotes));
     });
 })
 

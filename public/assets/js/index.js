@@ -31,7 +31,7 @@ const getNotes = () =>
     headers: {
       'Content-Type': 'application/json',
     },
-    
+
   });
 
 const saveNote = (note) =>
@@ -76,6 +76,8 @@ const handleNoteSave = () => {
     getAndRenderNotes();
     renderActiveNote();
   });
+
+  console.log("note saved")
 };
 
 // Delete the clicked note

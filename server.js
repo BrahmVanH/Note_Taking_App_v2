@@ -49,7 +49,7 @@ app.post('/api/notes', function(req, res) {
             if (err) {
                 return err;
             }
-            console.log(noteDb);
+            console.log("POSTED: " + noteDb);
             res.json(noteDb);
         });
     });

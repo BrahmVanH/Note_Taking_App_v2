@@ -11,24 +11,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
-})
 
 app.get('/notesPage', function(req, res) {
     res.sendFile(path.join(__dirname, 'public/notes.html'));
 });
 
-app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
-});
 
 app.get('/api/notes', function(req, res) {
     fs.readFile(dbFilePath, 'utf8', (err, data) => {
-       
-       if (err) {
-        return err;
-    }
+        
+        if (err) {
+            return err;
+        }
         console.log("You've got data", data)
         res.json(JSON.parse(data));
     });
@@ -59,20 +53,23 @@ app.post('/api/notes', function(req, res) {
 app.delete('api/notes/:id', function(req, res) {
     let delReq = req.params;
     let id = delReq.id;
-
+    
     fs.readFile(dbFilePath, 'utf8', (err, data) => {
-         
+        
         let noteDb = JSON.parse(data);
         
-         const filteredNotes = noteDb.filter((element) => element.id !== id);
-
-         fs.writeFileSync(dbFilePath, JSON.stringify(filteredNotes));
+        const filteredNotes = noteDb.filter((element) => element.id !== id);
+        
+        fs.writeFileSync(dbFilePath, JSON.stringify(filteredNotes));
     });
+})
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 })
 
 
 app.listen(PORT, () =>
-  console.log(`App listening at http://localhost:${PORT} 🚀`)
+console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
 
 

@@ -29,10 +29,10 @@ app.get('/api/notes', function(req, res) {
 });
 
 app.post('/api/notes', function(req, res) {
-    let newNote = req.body;
+    var newNote = req.body;
 
     fs.readFile(__dirname, 'db/db.json', (err, data) => {
-        let noteDb = JSON.parse(data);
+        var noteDb = JSON.parse(data);
         noteDb.push(newNote);
         fs.writeFile(__dirname, '/db/db.json', JSON.stringify(noteDb));
     });

@@ -42,7 +42,7 @@ app.post('/api/notes', function(req, res) {
         } 
         
         noteDb = JSON.parse(data);
-        var id = notes[notes.length-1].id + 1
+        var id = noteDb[noteDb.length-1].id + 1
         var newNote = { title: req.body.title, text: req.body.text, id: id };
         noteDb.push(newNote);
         fs.writeFile(dbFilePath, JSON.stringify(noteDb), function (err, data) {

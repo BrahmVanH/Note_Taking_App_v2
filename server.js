@@ -21,7 +21,7 @@ app.get('/notesPage', function(req, res) {
 
 
 
-app.get('/api/notes', function(req, res) {
+app.get('/api/notes', async function(req, res) {
     fs.readFileSync(dbFilePath, 'utf8', (err, data) => {
        
        if (err) {
@@ -32,9 +32,9 @@ app.get('/api/notes', function(req, res) {
     });
 });
 
-app.post('/api/notes', function(req, res) {
+app.post('/api/notes', async function(req, res) {
     
-    fs.readFile(dbFilePath, 'utf8', (err, data) => {
+    fs.readFileSync(dbFilePath, 'utf8', (err, data) => {
         if(err) {
             return console.log(err);
         } 
@@ -43,7 +43,7 @@ app.post('/api/notes', function(req, res) {
         var id = noteDb[noteDb.length-1].id + 1
         var newNote = { title: req.body.title, text: req.body.text, id: id };
         noteDb.push(newNote);
-        fs.writeFile(dbFilePath, JSON.stringify(noteDb), function (err, data) {
+        fs.writeFileSync(dbFilePath, JSON.stringify(noteDb), function (err, data) {
             if (err) {
                 return err;
             }
@@ -54,7 +54,7 @@ app.post('/api/notes', function(req, res) {
 });
 
 
-app.delete('api/notes/:id', function(req, res) {
+app.delete('api/notes/:id', async function(req, res) {
     let delReq = req.params;
     let id = delReq.id;
 

@@ -24,7 +24,7 @@ app.get('/*', function (req, res) {
 });
 
 app.get('/api/notes', function(req, res) {
-    fs.readFile(dbFilePath, 'utf8', (err, data) => {
+    fs.readFileSync(dbFilePath, 'utf8', (err, data) => {
        
        if (err) {
         return err;

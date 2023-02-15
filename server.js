@@ -22,13 +22,13 @@ app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-app.get('api/notes/', function(req, res) {
+app.get('/api/notes', function(req, res) {
     fs.readFile(__dirname, '/db/db.json', (err, data) => {
         return res.json((JSON.parse(data)));
     });
 });
 
-app.post('api/notes/', function(req, res) {
+app.post('/api/notes', function(req, res) {
     let newNote = req.body;
 
     fs.readFile(__dirname, 'db/db.json', (err, data) => {

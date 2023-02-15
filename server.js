@@ -23,7 +23,7 @@ app.get('/*', function (req, res) {
 });
 
 app.get('/api/notes', function(req, res) {
-    fs.readFile('./db/db.json', (err, data) => {
+    fs.readFile(path.join(__dirname, '/db/db.json'), (err, data) => {
         return res.json((JSON.parse(data)));
     });
 });
@@ -31,10 +31,10 @@ app.get('/api/notes', function(req, res) {
 app.post('/api/notes', function(req, res) {
     var newNote = req.body;
 
-    fs.readFile('./db/db.json', (err, data) => {
+    fs.readFile(path.join(__dirname, '/db/db.json'), (err, data) => {
         var noteDb = JSON.parse(data);
         noteDb.push(newNote);
-        fs.writeFile('./db/db.json', JSON.stringify(noteDb));
+        fs.writeFile(path.join(__dirname, '/db/db.json'), JSON.stringify(noteDb));
     });
 });
 
@@ -43,12 +43,12 @@ app.delete('api/notes/:id', function(req, res) {
     let delReq = req.params;
     let id = delReq.id;
 
-    fs.readFile('./db/db.json', (err, data) => {
+    fs.readFile(path.join(__dirname, '/db/db.json'), (err, data) => {
          let noteDb = JSON.parse(data);
         
          const filteredNotes = noteDb.filter((element) => element.id !== id);
 
-         fs.writeFileSync('./db/db.json', JSON.stringify(filteredNotes));
+         fs.writeFileSync(path.join(__dirname, '/db/db.json'), JSON.stringify(filteredNotes));
     });
 })
 

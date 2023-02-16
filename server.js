@@ -51,12 +51,15 @@ app.post('/api/notes', function(req, res) {
 
 
 app.delete('api/notes/:id', function(req, res) {
-    let delReq = req.params;
-    let id = delReq.id;
+    var delReq = req.params;
+    var id = delReq.id;
     
     fs.readFile(dbFilePath, 'utf8', (err, data) => {
+        if(err) {
+            return console.log(err);
+        }
         
-        let noteDb = JSON.parse(data);
+        noteDb = JSON.parse(data);
         
         const filteredNotes = noteDb.filter((element) => element.id !== id);
         

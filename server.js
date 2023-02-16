@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
 const app = express();
 const dbFilePath = path.join(__dirname, '/db/db.json');
 
@@ -34,9 +35,9 @@ app.post('/api/notes', function(req, res) {
         if(err) {
             return console.log(err);
         } 
-        
+        const randomId = uuidv4();
         noteDb = JSON.parse(data);
-        var id = noteDb[noteDb.length-1].id + 1
+        var id = randomId.slice(9, 18);
         var newNote = { title: req.body.title, text: req.body.text, id: id };
         noteDb.push(newNote);
         fs.writeFile(dbFilePath, JSON.stringify(noteDb), function (err, data) {

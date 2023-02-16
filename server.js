@@ -52,8 +52,8 @@ app.post('/api/notes', function(req, res) {
 
 
 app.delete('api/notes/:id', function(req, res) {
-    var delReq = req.params;
-    var id = delReq.id;
+   
+    var id = req.body
     
     fs.readFile(dbFilePath, 'utf8', (err, data) => {
         if(err) {

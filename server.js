@@ -53,7 +53,9 @@ app.post('/api/notes', function(req, res) {
 
 app.delete('api/notes/:id', function(req, res) {
    
-    var id = req.body
+    var idWithQuotes = req.body
+    var id = idWithQuotes.replace(/["]/g, '');
+
     
     fs.readFile(dbFilePath, 'utf8', (err, data) => {
         if(err) {

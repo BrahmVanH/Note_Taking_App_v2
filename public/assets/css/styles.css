@@ -18,19 +18,10 @@ body {
 
 .note-textarea,
 .note-title {
- /* color: #000000;
+  color: #000000;
   width: 100%;
   outline: none;
-  border: none; */
-
-  background: url(http://i.stack.imgur.com/ynxjD.png) repeat-y;
-  width: 600px;
-  height: 300px;
-  font: normal 14px verdana;
-  line-height: 25px;
-  padding: 2px 10px;
-  border: solid 1px #ddd;
-   
+  border: none;
 }
 
 .note-textarea {

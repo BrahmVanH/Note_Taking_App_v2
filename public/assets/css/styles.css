@@ -5,6 +5,14 @@ body {
   padding: 0;
 }
 
+.navbar {
+  background-color: #b2955f;
+}
+
+#startButton {
+  background-color: #a2732a;
+}
+
 .save-note {
   display: none;
 }
